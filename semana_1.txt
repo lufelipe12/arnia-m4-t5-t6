@@ -1,0 +1,10 @@
+SEMANA 1.
+
+04/03.
+
+1- 
+
+a) Fazer a instalação do nest cli.
+b) Iniciar o primeiro projeto nest.
+c) Identificar as camadas.
+d) Rodar o projeto.
