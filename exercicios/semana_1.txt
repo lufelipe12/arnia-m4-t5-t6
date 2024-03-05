@@ -1,0 +1,24 @@
+SEMANA 1.
+
+04/03.
+
+1- 
+
+a) Fazer a instalação do nest cli.
+b) Iniciar o primeiro projeto nest.
+c) Identificar as camadas.
+d) Rodar o projeto.
+
+05/03.
+
+Continuando no projeto anterior...
+
+1- 
+
+a) Criar uma primeira rota /hello -> retornar 'Hello arnia.' (código 200 de sucesso.)
+
+2-
+
+a) Criar uma nova resource 'customers'
+b) Criar uma rota POST de customer (firstName, lastName, age)
+c) Criar uma rota de GET customers
