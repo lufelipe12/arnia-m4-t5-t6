@@ -22,3 +22,14 @@ a) Criar uma primeira rota /hello -> retornar 'Hello arnia.' (código 200 de suc
 a) Criar uma nova resource 'customers'
 b) Criar uma rota POST de customer (firstName, lastName, age)
 c) Criar uma rota de GET customers
+
+06/03.
+
+Continuando no projeto anterior...
+
+a) Adicionar query na rota de get customers para filtrar pela age
+b) Criar uma rota de GET customer pelo id
+c) Criar uma rota de PATCH de customer pelo id 
+
+** Desafio 1 -> Utilizar o parseIntPipe para o id das requisições.
+** Desafio 2 -> Deve ser lançada uma exceção nas questões "a" e "b" caso o customer não existir.
