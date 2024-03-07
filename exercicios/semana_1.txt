@@ -33,3 +33,11 @@ c) Criar uma rota de PATCH de customer pelo id
 
 ** Desafio 1 -> Utilizar o parseIntPipe para o id das requisições.
 ** Desafio 2 -> Deve ser lançada uma exceção nas questões "a" e "b" caso o customer não existir.
+
+07/03.
+
+Continuando no projeto anterior...
+
+a) Criar uma rota de DELETE customer pelo id (Deve ser lançada uma exceção se o customer não existir)
+b) Adicionar validators para a criação de um customer. (Todos campos obrigatórios e validação de tipo)
+c) Criar uma forma de gerar o id dinamicamente.
