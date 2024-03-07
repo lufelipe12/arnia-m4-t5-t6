@@ -1,5 +1,7 @@
-import { BadRequestException, HttpException, Injectable } from "@nestjs/common";
+import { HttpException, Injectable, NotFoundException } from "@nestjs/common";
+
 import { CreateCarDto } from "./dtos/create-car.dto";
+import { UpdateCarDto } from "./dtos/update-car.dto";
 
 @Injectable()
 export class CarsService {
@@ -7,11 +9,7 @@ export class CarsService {
 
   create(payload: CreateCarDto) {
     try {
-      if (!payload.brand) {
-        throw new BadRequestException("A car needs to have a brand.");
-      }
-
-      const carCreated = { id: this.carsDb.length + 1, ...payload };
+      const carCreated = { id: new Date().getTime(), ...payload };
 
       this.carsDb.push(carCreated);
 
@@ -30,6 +28,34 @@ export class CarsService {
       }
 
       return this.carsDb;
+    } catch (error) {
+      console.log(error);
+
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
+  findOne(id: number) {
+    try {
+      const carFound = this.carsDb.find((car) => car.id === id);
+
+      if (!carFound) {
+        throw new NotFoundException(`A car with this id:${id} not found.`);
+      }
+
+      return carFound;
+    } catch (error) {
+      console.log(error);
+
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
+  update(id: number, payload: UpdateCarDto) {
+    try {
+      const carToUpdate = this.findOne(id);
+
+      return Object.assign(carToUpdate, payload);
     } catch (error) {
       console.log(error);
 
