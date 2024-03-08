@@ -62,4 +62,18 @@ export class CarsService {
       throw new HttpException(error.message, error.status);
     }
   }
+
+  delete(id: number) {
+    try {
+      const carToDelete = this.findOne(id);
+
+      this.carsDb = this.carsDb.filter((car) => car.id !== carToDelete.id);
+
+      return carToDelete;
+    } catch (error) {
+      console.log(error);
+
+      throw new HttpException(error.message, error.status);
+    }
+  }
 }
