@@ -41,3 +41,11 @@ Continuando no projeto anterior...
 a) Criar uma rota de DELETE customer pelo id (Deve ser lançada uma exceção se o customer não existir)
 b) Adicionar validators para a criação de um customer. (Todos campos obrigatórios e validação de tipo)
 c) Criar uma forma de gerar o id dinamicamente.
+
+08/03.
+
+Continuando no projeto anterior...
+
+a) Documente todas as rotas utilizando o swagger.
+
+* Desafio: https://www.codewars.com/kata/5467e4d82edf8bbf40000155
