@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { Customer } from './entities/customer.entity';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -33,5 +33,17 @@ export class CustomerService {
 
     Object.assign(customer, data);
     return customer;
+  }
+
+  delete(id: number) {
+    const customer = this.findById(id);
+
+    if (customer) {
+      const index = this.customers.indexOf(customer);
+      this.customers.splice(index, 1);
+      return customer;
+    }
+
+    throw new NotFoundException('Customer não encontrado');
   }
 }

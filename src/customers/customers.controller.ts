@@ -1,8 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -34,5 +36,10 @@ export class CustomerController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() data: UpdateCustomerDto) {
     return this.customerService.update(+id, data);
+  }
+
+  @Delete(':id')
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.customerService.delete(id);
   }
 }
