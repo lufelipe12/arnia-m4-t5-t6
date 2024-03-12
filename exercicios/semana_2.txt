@@ -12,3 +12,14 @@ c) Listar os usuários.
 d) Criar a primeira tabela usuários (id -> PK; name -> VARCHAR(32), age -> INTEGER).
 
 ** Desafio -> Criar o primeiro banco de dados e listá-lo.
+
+12/03.
+
+a) Baixar o Beekeeper e fazer a conexão com seu Postgres local e criar o primeiro banco de dados (firstdb)
+b) Adicionar o primeiro usuário na tabela usuários.
+c) Adicionar o segundo usuário na tabela usuários.
+d) Adicionar 2 usuários na mesma query na tabela usuários.
+e) Retornar todos usuários da tabela.
+f) Deletar a tabela usuários.
+
+** Desafio -> Recriar a tabela usuários com uma constraint se a idade é maior que 2.
