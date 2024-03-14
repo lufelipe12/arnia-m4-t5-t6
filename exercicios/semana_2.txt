@@ -40,3 +40,20 @@ h) Altere o "isAdmin" de um dos usuarios para true.
 
 ** Desafio 1 -> Selecione todos os usuarios com o campo isAdmin = false ordenado pela idade.
 ** Desafio 2 -> Selecione todos os usuarios e retorne a quantidade de usuarios (COUNT.)
+
+14/03.
+
+1- 
+
+a) Crie uma nova tabela "products" ("ID" -> SERIAL PK; "name" -> VARCHAR(100) NOT NULL; "description" VARCHAR(255); "in_stock" -> BOOLEAN NOT NULL; "price" FLOAT)
+b) Utilize a query em query.sql para popular a tabela "products"
+c) Selecione todas colunas dos produtos que começam com a letra "S".
+d) Selecione a conta dos produtos que começam com a letra "S".
+e) Selecione o produto com maior "price".
+f) Faça a soma de todos "price".
+g) Selecione todas colunas de todos produtos ordenando por "name".
+h) Selecione todos produtos com "in_stock" = true agrupando por "in_stock"
+i) Retorne a média do "price" de todos produtos.
+
+** Desafio 1 -> Adicione mais uma coluna (category -> VARCHAR(60)) 
+** Desafio 2 -> Atualize essa coluna para que ela não aceite valores nulos (Fazer a correção necessária para a query funcionar adicionando a constraint)
