@@ -57,3 +57,24 @@ i) Retorne a média do "price" de todos produtos.
 
 ** Desafio 1 -> Adicione mais uma coluna (category -> VARCHAR(60)) 
 ** Desafio 2 -> Atualize essa coluna para que ela não aceite valores nulos (Fazer a correção necessária para a query funcionar adicionando a constraint)
+
+15/03.
+
+1-
+
+a) Crie uma nova tabela "evaluation" ("ID" -> SERIAL PK, "description" TEXT, "rating" -> INT de 0 a 5 NOT NULL, "product_id" -> FK product.id com deleção em cascata)
+b) Faça a inserção de dados nessa tabela criada referenciando os produtos avaliados (obrigatoriamente um deles sem descrição.)
+c) Selecione os dados da tabela de produtos juntamente com as de avaliações.
+d) Selecione os produtos que tiveram avaliação igual ou acima de "rating" 4.
+e) Selecione os produtos que a avaliação = NULL.
+f) Faça a contagem do total de linhas na tabela de avaliações.
+g) Delete um dos produtos da tabela produtos.
+h) Faça a contagem do total de linhas na tabela de avaliações.
+
+Extra:
+
+i) Crie mais uma tabela para referenciar a tabela produtos "store" ("ID" -> SERIAL PK, "name" VARCHAR(64) NOT NULL, "city" -> VARCHAR(64))
+j) Faça uma modificação na tabela de produtos para aceitar uma FK store_id.
+k) Adicione valores a tabela "store"
+l) Faça um update na tabela de produtos para adicionar os ids das lojas criadas.
+m) Selecione todas lojas que possuem produtos em estoque.
