@@ -13,3 +13,19 @@ f) Listar o nome e cidade de todas lojas que possuem produtos com preço superio
 g) Obtenha o nome das lojas e o número total de avaliações registradas para cada loja.
 
 ** Desafio -> Listar o nome dos produtos e a média das classificações de avaliações para cada produto, considerando apenas os produtos que possuem pelo menos uma avaliação.
+
+19/03.
+
+1- 
+
+a) Crie uma tabela "developers" ("id" -> UUID PK; "name" -> VARCHAR(100) NOT NULL; "skills" -> VARCHAR(200) NOT NULL; "is_active" -> BOOLEAN DEFAULT TRUE; "experience_years" -> INT NOT NULL; "created_at" -> DATE DEFAULT NOW);
+b) Crie uma tabela "projects" ("id" -> UUID PK; "project_name" -> VARCHAR(100) NOT NULL; "start_date" -> DATE, "created_at" -> DATE DEFAULT NOW);
+c) Crie uma tabela pivô "developer_projects" para relacionar as duas primeiras tabelas N:N;
+d) Insira os dados presentes em query2.sql
+e) Popule a tabela de "developer_projects"
+f) Liste os programadores que estão atribuídos a projetos e mostre os nomes dos projetos aos quais estão atribuídos.
+g) Liste o project_name e o start_date dos projetos que possuem pelo menos um programador com mais de 5 anos de experience_years.
+h) Conte quantos programadores estão envolvidos no projeto com nome 'Mobile App Development'.
+i) Liste os projetos que não têm programadores atribuídos.
+
+** Desafio -> Liste os programadores que estão atribuídos a projetos que têm nomes que começam com a letra 'E'. Para cada programador, mostre seu nome, suas habilidades e a quantidade de projetos únicos em que estão envolvidos.
