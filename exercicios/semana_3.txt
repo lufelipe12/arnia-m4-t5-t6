@@ -29,3 +29,17 @@ h) Conte quantos programadores estão envolvidos no projeto com nome 'Mobile App
 i) Liste os projetos que não têm programadores atribuídos.
 
 ** Desafio -> Liste os programadores que estão atribuídos a projetos que têm nomes que começam com a letra 'E'. Para cada programador, mostre seu nome, suas habilidades e a quantidade de projetos únicos em que estão envolvidos.
+
+
+// TYPEORM - POSTGRES
+
+20/03. 
+
+1- 
+
+Para a execução desse exercício crie previamente um banco de dados chamado "arnia_users"
+
+a) Crie um novo projeto em nestjs chamado "users_demo"
+b) Instale nesse projeto o typeorm, @nestjs/typeorm e pg
+c) Faça a configuração necessária para a conexão com o banco "arnia_users"
+d) Inicie o projeto e verifique se está tudo ok.
