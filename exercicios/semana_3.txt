@@ -43,3 +43,14 @@ a) Crie um novo projeto em nestjs chamado "users_demo"
 b) Instale nesse projeto o typeorm, @nestjs/typeorm e pg
 c) Faça a configuração necessária para a conexão com o banco "arnia_users"
 d) Inicie o projeto e verifique se está tudo ok.
+
+21/03.
+
+Continuando no projeto anterior...
+
+1- 
+
+a) Crie a primeira entidade users (id, email (string), password (string), isActive (boolean), createdAt (Date)).
+b) Inicie o projeto.
+c) Verifique a criação da tabela no banco, caso não tenha sido criada, faça os ajustes necessários.
+d) Fazer a primeira rota simples para criação de user.
