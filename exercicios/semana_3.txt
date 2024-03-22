@@ -54,3 +54,26 @@ a) Crie a primeira entidade users (id, email (string), password (string), isActi
 b) Inicie o projeto.
 c) Verifique a criação da tabela no banco, caso não tenha sido criada, faça os ajustes necessários.
 d) Fazer a primeira rota simples para criação de user.
+
+22/03.
+
+Continuando no projeto anterior...
+
+1-
+
+a) Adicione validações na entidade users (email -> obrigatório e tamanho entre 5 e 50 caracteres, password -> obrigatório e mínimo 3 caracteres, createdAt -> Default hoje)
+b) Crie um dto para fazer essa validação pelo lado da api. (Utilize de class-validator)
+c) Crie mais alguns usuários após essas validações.
+
+2- 
+
+a) Crie uma rota para retornar todos usuários.
+b) Crie uma rota para retornar o usuário pelo id.
+
+3-
+
+a) Crie uma rota para fazer um update de user pelo id.
+b) Crie uma rota para o soft delete, tornando o isActive do user para false.
+c) Nas rotas que buscam o usuário pelo id, caso ele não exista deve ser retornada uma exceção.
+
+** Desafio -> Adicione uma query na rota de buscar todos usuários filtrar pelos usuários ativos ou inativos.
