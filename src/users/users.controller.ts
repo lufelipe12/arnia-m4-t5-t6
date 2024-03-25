@@ -36,7 +36,7 @@ export class UsersController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  softDelete(@Param('id') id: string) {
+    return this.usersService.softDelete(+id);
   }
 }

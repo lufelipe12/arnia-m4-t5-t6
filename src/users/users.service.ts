@@ -1,5 +1,11 @@
 import { Repository } from 'typeorm';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -31,11 +37,51 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    try {
+      // este metodo UPDATE retorna um objeto que contém affected. Este atributo representa quantas linhas este método afetou.
+      // Como estamos buscando através do ID que é único, corre o risco de atingir apenas 1 ou 0
+      // se for 1, segnigica que alterou
+      // se for 0, significa que o ID não existe no banco, logo deve retornar a mensagem apropriada
+      const { affected } = await this.userRepository.update(id, updateUserDto);
+      if (!affected) {
+        throw new NotFoundException(`User ${id} does not exist`);
+      }
+
+      // apos alterar, se não entrou no IF anterior, deve retornar o usuárion atualizado.
+      return await this.userRepository.findOneBy({ id });
+    } catch (error) {
+      throw new HttpException(
+        {
+          message: error?.message ?? 'Internal Server Error',
+        },
+        error?.status ?? HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async softDelete(id: number) {
+    try {
+      // este metodo UPDATE retorna um objeto que contém affected. Este atributo representa quantas linhas este método afetou.
+      // Como estamos buscando através do ID que é único, corre o risco de atingir apenas 1 ou 0
+      // se for 1, segnigica que alterou
+      // se for 0, significa que o ID não existe no banco, logo deve retornar a mensagem apropriada
+      const { affected } = await this.userRepository.update(id, {
+        isActive: false,
+      });
+
+      if (!affected) {
+        throw new NotFoundException(`User ${id} does not exist`);
+      }
+
+      return;
+    } catch (error) {
+      throw new HttpException(
+        {
+          message: error?.message ?? 'Internal Server Error',
+        },
+        error?.status ?? HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }
