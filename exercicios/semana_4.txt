@@ -1,0 +1,12 @@
+SEMANA 4.
+
+25/03.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Crie um método no service de users para buscar um user pelo email, retornando também a senha.
+b) Adicione o bcrypt para encriptar o password usando @BeforeInsert
+c) Crie um módulo para auth.
+d) Crie um controller e um service para auth.
+
+** Crie uma rota para login, retornando um JWT token. Utilize o @nestjs/jwt.
