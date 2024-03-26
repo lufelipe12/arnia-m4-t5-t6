@@ -10,3 +10,18 @@ c) Crie um módulo para auth.
 d) Crie um controller e um service para auth.
 
 ** Crie uma rota para login, retornando um JWT token. Utilize o @nestjs/jwt.
+
+26/03.
+
+Ainda sobre o projeto criado anteriormente...
+
+1-
+
+a) Crie uma nova entidade Address (id, street, city, zipCode).
+b) Rode o projeto e verifique se tabela foi criada corretamente.
+c) Crie uma nova resource de Adresses.
+d) Crie uma rota de post de Adresses (faça validações no dto).
+e) Crie uma rota de patch de Adresses
+
+** Desafio -> Crie um auth guard para proteção das rotas.
+** Desafio -> Crie uma rota GET -> /users/profile utilizando o guard para retornar informações do usuário contido no token.
