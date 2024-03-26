@@ -30,11 +30,32 @@ export class UsersService {
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.userRepository.find();
   }
 
   findOne(id: number) {
     return `This action returns a #${id} user`;
+  }
+
+  async findByEmail(email: string) {
+    try {
+      const user = await this.userRepository.findOneOrFail({
+        where: {
+          email,
+        },
+        select: {
+          createdAt: true,
+          email: true,
+          id: true,
+          isActive: true,
+          password: true,
+        },
+      });
+
+      return user;
+    } catch (error) {
+      throw new NotFoundException(error?.message);
+    }
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
