@@ -25,3 +25,13 @@ e) Crie uma rota de patch de Adresses
 
 ** Desafio -> Crie um auth guard para proteção das rotas.
 ** Desafio -> Crie uma rota GET -> /users/profile utilizando o guard para retornar informações do usuário contido no token.
+
+27/03.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Crie uma rota para buscar todos Adresses.
+b) Adicione na entidade Adress o relacionamento 1:1 com user (não pode ser nulo)
+c) Na rota profile do user, modifique para juntamente voltar o Adress do mesmo. (dica: typeORM relations)
+
+** Desafio -> Crie uma nova entidade Pet (id, name, age, breed -> todos obrigatórios e user (relacionamento N:1) -> não pode ser nulo)
