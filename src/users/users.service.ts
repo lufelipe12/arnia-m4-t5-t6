@@ -39,4 +39,18 @@ export class UsersService {
       throw new HttpException(error.message, error.status);
     }
   }
+
+  async profile(id: number) {
+    try {
+      return await this.usersRepository.findOne({
+        where: { id },
+        relations: {
+          driverLicense: true,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(error.message, error.status);
+    }
+  }
 }
