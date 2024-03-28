@@ -24,7 +24,7 @@ export class DriverLicenses {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToOne(() => Users, (user) => user.driverLicense)
+  @OneToOne(() => Users, (user) => user.driverLicense, { nullable: false })
   @JoinColumn()
   user: Users;
 }
