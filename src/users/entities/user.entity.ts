@@ -4,10 +4,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
+import { Address } from 'src/addresses/entities/address.entity';
 
 @Entity()
 export class User {
@@ -25,6 +27,9 @@ export class User {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @OneToOne(() => Address, (address) => address.user)
+  address: Address;
 
   @BeforeInsert()
   @BeforeUpdate()

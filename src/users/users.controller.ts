@@ -6,10 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { Request } from 'express';
 
 @Controller('users')
 export class UsersController {
@@ -23,6 +27,14 @@ export class UsersController {
   @Get()
   findAll() {
     return this.usersService.findAll();
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  profile(@Req() request: Request) {
+    const user = request['user'];
+    console.log('user', user);
+    return this.usersService.profile(user.sub);
   }
 
   @Get(':id')

@@ -33,7 +33,7 @@ export class AddressesService {
   }
 
   findAll() {
-    return `This action returns all addresses`;
+    return this.addressRepository.find();
   }
 
   findOne(id: number) {

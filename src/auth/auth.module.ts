@@ -6,7 +6,10 @@ import { AuthController } from './auth.controller';
 import { jwtOptions } from './jwt/jwt.config';
 
 @Module({
-  imports: [JwtModule.registerAsync(jwtOptions), UsersModule],
+  imports: [
+    JwtModule.registerAsync({ ...jwtOptions, global: true }),
+    UsersModule,
+  ],
   controllers: [AuthController],
   providers: [AuthService],
 })

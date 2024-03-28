@@ -105,4 +105,21 @@ export class UsersService {
       );
     }
   }
+
+  async profile(id: number) {
+    try {
+      const user = this.userRepository.findOneOrFail({
+        where: {
+          id,
+        },
+        relations: {
+          address: true,
+        },
+      });
+
+      return user;
+    } catch (error) {
+      throw new NotFoundException(error?.message);
+    }
+  }
 }
