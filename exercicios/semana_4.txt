@@ -35,3 +35,21 @@ b) Adicione na entidade Adress o relacionamento 1:1 com user (não pode ser nulo
 c) Na rota profile do user, modifique para juntamente voltar o Adress do mesmo. (dica: typeORM relations)
 
 ** Desafio -> Crie uma nova entidade Pet (id, name, age, breed -> todos obrigatórios e user (relacionamento N:1) -> não pode ser nulo)
+
+28/03.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Rode o projeto e verifique se tabela Pet foi criada corretamente.
+b) Crie uma rota para criação de Pets.
+c) Crie uma rota para buscar um pet pelo id, voltando também as informações do usuário relacionado.
+d) Modifique a rota de patch de Adresses para que somente o user pertencente ao Address possa modificá-lo.
+
+2- 
+
+a) Crie uma rota de get -> /pets que retorna todos os pets juntamente com uma query para filtrá-los pela breed.
+b) Na rota de get profile adicione também as informações dos pets do usuário logado.
+c) Faça uma rota para update de pets. Obs: Somente o usuário dono do pet pode modificá-lo.
+d) Faça uma rota de get -> /pets/my-pets que retorna somente os pets do usuário logado.
+
+** Desafio -> Documente as rotas criadas até agora com Swagger.
