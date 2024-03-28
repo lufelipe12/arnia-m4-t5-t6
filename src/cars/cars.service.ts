@@ -27,6 +27,22 @@ export class CarsService {
     }
   }
 
+  async buy(userId: number, id: number) {
+    try {
+      const carToBuy = await this.findOne(id);
+
+      await this.carsRepository.save(
+        Object.assign(carToBuy, { user: { id: userId } }),
+      );
+
+      return { message: 'Car purschased.', car: carToBuy };
+    } catch (error) {
+      console.log(error);
+
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
   async findAll(page: number, limit: number, color?: string) {
     try {
       const carsData = await this.carsRepository.find({
@@ -50,7 +66,9 @@ export class CarsService {
 
   async findOne(id: number) {
     try {
-      const carFound = await this.carsRepository.findOne({ where: { id } });
+      const carFound = await this.carsRepository.findOne({
+        where: { id },
+      });
 
       if (!carFound) {
         throw new NotFoundException(`A car with this id: ${id} not found.`);

@@ -16,6 +16,7 @@ import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { AuthGuard } from '../auth/guards/auth.guard';
+import { CurrentUser } from '../decorators/current-user.decorator';
 
 @Controller('cars')
 export class CarsController {
@@ -25,6 +26,16 @@ export class CarsController {
   @Post()
   async create(@Body() payload: CreateCarDto) {
     return await this.carsService.create(payload);
+  }
+
+  @UseGuards(AuthGuard)
+  @Post(':id/buy')
+  async buy(
+    @CurrentUser() currentUser: { userId: number },
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    const { userId } = currentUser;
+    return await this.carsService.buy(userId, id);
   }
 
   @Get()

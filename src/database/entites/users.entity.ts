@@ -4,6 +4,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -11,6 +12,7 @@ import {
 import * as bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
 import { DriverLicenses } from './driver-licenses.entity';
+import { Cars } from './cars.entity';
 
 @Entity('users')
 export class Users {
@@ -43,6 +45,9 @@ export class Users {
 
   @OneToOne(() => DriverLicenses, (dl) => dl.user, { onDelete: 'CASCADE' })
   driverLicense: DriverLicenses;
+
+  @OneToMany(() => Cars, (cars) => cars.user)
+  cars: Cars[];
 
   @BeforeInsert()
   async passwordHash() {
