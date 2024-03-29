@@ -1,4 +1,5 @@
 import {
+  ForbiddenException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -40,8 +41,21 @@ export class AddressesService {
     return `This action returns a #${id} address`;
   }
 
-  async update(id: number, updateAddressDto: UpdateAddressDto) {
+  async update(id: number, updateAddressDto: UpdateAddressDto, userId: number) {
     try {
+      const address = await this.addressRepository.findOne({
+        where: {
+          id,
+        },
+        relations: {
+          user: true,
+        },
+      });
+
+      if (address.user.id !== userId) {
+        throw new ForbiddenException();
+      }
+
       const { affected } = await this.addressRepository.update(
         id,
         updateAddressDto,

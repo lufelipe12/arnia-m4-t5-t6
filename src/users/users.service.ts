@@ -33,8 +33,18 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    try {
+      const user = await this.userRepository.findOneOrFail({
+        where: {
+          id,
+        },
+      });
+
+      return user;
+    } catch (error) {
+      throw new NotFoundException(error?.message);
+    }
   }
 
   async findByEmail(email: string) {

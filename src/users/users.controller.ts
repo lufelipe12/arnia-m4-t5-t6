@@ -33,7 +33,6 @@ export class UsersController {
   @Get('profile')
   profile(@Req() request: Request) {
     const user = request['user'];
-    console.log('user', user);
     return this.usersService.profile(user.sub);
   }
 
