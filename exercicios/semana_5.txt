@@ -1,0 +1,13 @@
+SEMANA 5.
+
+01/04.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Crie uma nova entidade Events (id, eventName, eventDate, participants (N:N com users)).
+b) Rode o projeto e veja a criação da tabela.
+c) Crie uma rota POST -> events.
+d) Crie uma rota para o usuário participar do evento. (sugestão -> /post -> /events/:id/participate).
+e) Na rota de get -> profile, puxar a relação com eventos também.
+
+** Desafio -> Faça a paginação da rota de get Pets.
