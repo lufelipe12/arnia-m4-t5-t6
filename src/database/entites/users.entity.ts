@@ -13,6 +13,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
+
 import { DriverLicenses } from './driver-licenses.entity';
 import { Cars } from './cars.entity';
 import { Auctions } from './auctions.entity';
@@ -35,7 +36,7 @@ export class Users {
   password: string;
 
   @Column({ type: 'int', nullable: true })
-  age: number;
+  age?: number;
 
   @CreateDateColumn()
   createdAt: Date;

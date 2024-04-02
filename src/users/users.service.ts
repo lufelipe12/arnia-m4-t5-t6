@@ -47,6 +47,7 @@ export class UsersService {
         relations: {
           driverLicense: true,
           cars: true,
+          auctions: true,
         },
       });
     } catch (error) {

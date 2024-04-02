@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
 import { Users } from './users.entity';
 
 @Entity('auctions')
@@ -20,8 +21,8 @@ export class Auctions {
   @Column({ type: 'varchar', length: 64, nullable: false })
   city: string;
 
-  @Column({ type: 'date' })
-  date: Date;
+  @Column({ type: 'date', nullable: true })
+  date?: Date;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -32,6 +33,8 @@ export class Auctions {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @ManyToMany(() => Users, (users) => users.auctions)
+  @ManyToMany(() => Users, (users) => users.auctions, {
+    onDelete: 'CASCADE',
+  })
   users: Users[];
 }
