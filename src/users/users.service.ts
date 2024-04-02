@@ -43,7 +43,7 @@ export class UsersService {
 
       return user;
     } catch (error) {
-      throw new NotFoundException(error?.message);
+      throw new NotFoundException(error?.message || 'User not found');
     }
   }
 
@@ -124,6 +124,7 @@ export class UsersService {
         },
         relations: {
           address: true,
+          pets: true,
         },
       });
 
