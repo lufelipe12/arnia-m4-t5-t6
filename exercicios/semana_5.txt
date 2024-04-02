@@ -11,3 +11,12 @@ d) Crie uma rota para o usuário participar do evento. (sugestão -> /post -> /e
 e) Na rota de get -> profile, puxar a relação com eventos também.
 
 ** Desafio -> Faça a paginação da rota de get Pets.
+
+02/04.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Crie um decorator de CurrentUser para substituir nas rotas que se utiliza req.user.
+b) Crie uma rota para fazer get de events.
+
+** Desafio -> Faça uma query para filtrar por eventDate (a partir de "eventDate")- Exemplo: Eventos a partir de 31/08/2023.
