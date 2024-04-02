@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -12,6 +13,7 @@ import * as bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
 import { Address } from 'src/addresses/entities/address.entity';
 import { Pet } from 'src/pets/entities/pet.entity';
+import { Event } from 'src/events/entities/event.entity';
 
 @Entity()
 export class User {
@@ -35,6 +37,9 @@ export class User {
 
   @OneToMany(() => Pet, (pet) => pet.user)
   pets: Pet[];
+
+  @ManyToMany(() => Event, (event) => event.participants)
+  events: Event[];
 
   @BeforeInsert()
   @BeforeUpdate()
