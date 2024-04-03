@@ -7,13 +7,13 @@ import {
   Param,
   Delete,
   UseGuards,
-  Req,
 } from '@nestjs/common';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { AddressesService } from './addresses.service';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
-import { Request } from 'express';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
+import { CurrentUserDto } from 'src/decorators/dto/current-user.dto';
 
 @Controller('addresses')
 export class AddressesController {
@@ -39,9 +39,8 @@ export class AddressesController {
   update(
     @Param('id') id: string,
     @Body() updateAddressDto: UpdateAddressDto,
-    @Req() request: Request,
+    @CurrentUser() user: CurrentUserDto,
   ) {
-    const user = request['user'];
     return this.addressesService.update(+id, updateAddressDto, user.sub);
   }
 

@@ -7,14 +7,14 @@ import {
   Param,
   Delete,
   UseGuards,
-  Req,
   Query,
 } from '@nestjs/common';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { Request } from 'express';
 import { PetsService } from './pets.service';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
+import { CurrentUserDto } from 'src/decorators/dto/current-user.dto';
 
 @Controller('pets')
 export class PetsController {
@@ -22,8 +22,10 @@ export class PetsController {
 
   @UseGuards(AuthGuard)
   @Post()
-  create(@Body() createPetDto: CreatePetDto, @Req() request: Request) {
-    const user = request['user'];
+  create(
+    @Body() createPetDto: CreatePetDto,
+    @CurrentUser() user: CurrentUserDto,
+  ) {
     return this.petsService.create(user.sub, createPetDto);
   }
 
@@ -34,8 +36,7 @@ export class PetsController {
 
   @UseGuards(AuthGuard)
   @Get('my-pets')
-  findMyPeys(@Req() req: Request) {
-    const user = req['user'];
+  findMyPeys(@CurrentUser() user: CurrentUserDto) {
     return this.petsService.findMyPets(+user.sub);
   }
 
@@ -49,10 +50,9 @@ export class PetsController {
   update(
     @Param('id') id: string,
     @Body() updatePetDto: UpdatePetDto,
-    @Req() req: Request,
+    @CurrentUser() user: CurrentUserDto,
   ) {
-    const user = req['user'];
-    return this.petsService.update(+id, updatePetDto, +user.sub);
+    return this.petsService.update(+id, updatePetDto, user.sub);
   }
 
   @Delete(':id')

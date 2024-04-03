@@ -7,13 +7,13 @@ import {
   Param,
   Delete,
   UseGuards,
-  Req,
 } from '@nestjs/common';
-import { Request } from 'express';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
+import { CurrentUserDto } from 'src/decorators/dto/current-user.dto';
 
 @Controller('events')
 export class EventsController {
@@ -31,8 +31,7 @@ export class EventsController {
 
   @UseGuards(AuthGuard)
   @Post(':id/participate')
-  partipate(@Param('id') id: string, @Req() req: Request) {
-    const user = req['user'];
+  partipate(@Param('id') id: string, @CurrentUser() user: CurrentUserDto) {
     return this.eventsService.partipate(+id, user.sub);
   }
 
