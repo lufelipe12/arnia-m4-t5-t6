@@ -10,13 +10,17 @@ import {
   Delete,
   HttpCode,
   UseGuards,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { CurrentUser } from '../decorators/current-user.decorator';
+import { diskStorage } from 'multer';
 
 @Controller('cars')
 export class CarsController {
@@ -66,5 +70,33 @@ export class CarsController {
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number) {
     return await this.carsService.delete(id);
+  }
+
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          const name = file.originalname.split('.')[0];
+          const extension = file.originalname.split('.')[1];
+
+          const newFileName =
+            name.split(' ').join('_') + '_' + Date.now() + '.' + extension;
+
+          cb(null, newFileName);
+        },
+      }),
+      fileFilter: (req, file, cb) => {
+        if (!file.originalname.match(/\.(jpeg|jpg|png|gif)$/)) {
+          return cb(null, false);
+        }
+
+        cb(null, true);
+      },
+    }),
+  )
+  @Post('upload-photo')
+  async uploadPhoto(@UploadedFile() photo: Express.Multer.File) {
+    console.log(photo);
   }
 }
