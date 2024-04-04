@@ -1,9 +1,15 @@
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
+import { Repository } from 'typeorm';
 
 import { CreateCarDto } from './dto/create-car.dto';
-import { Cars } from '../database/entites';
-import { Repository } from 'typeorm';
+import { CarPhotos, Cars } from '../database/entites';
 import { UpdateCarDto } from './dto/update-car.dto';
 
 @Injectable()
@@ -11,6 +17,10 @@ export class CarsService {
   constructor(
     @InjectRepository(Cars)
     private carsRepository: Repository<Cars>,
+    @InjectRepository(CarPhotos)
+    private carPhotosRepository: Repository<CarPhotos>,
+
+    private configService: ConfigService,
   ) {}
 
   async create(payload: CreateCarDto) {
@@ -43,6 +53,31 @@ export class CarsService {
     }
   }
 
+  async uploadPhoto(id: number, photo: Express.Multer.File) {
+    try {
+      if (!photo) {
+        throw new BadRequestException('File is not an image.');
+      }
+
+      const car = await this.findOne(id);
+
+      const photoUrl = `${this.configService.get('BASE_URL')}cars/photos/${photo.filename}`;
+
+      const newCarPhoto = this.carPhotosRepository.create({
+        photoUrl,
+        car: { id: car.id },
+      });
+
+      await this.carPhotosRepository.save(newCarPhoto);
+
+      return newCarPhoto;
+    } catch (error) {
+      console.log(error);
+
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
   async findAll(page: number, limit: number, color?: string) {
     try {
       const carsData = await this.carsRepository.find({
@@ -68,6 +103,9 @@ export class CarsService {
     try {
       const carFound = await this.carsRepository.findOne({
         where: { id },
+        relations: {
+          photos: true,
+        },
       });
 
       if (!carFound) {
