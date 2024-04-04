@@ -17,6 +17,7 @@ import { BadRequestException } from '@nestjs/common';
 import { DriverLicenses } from './driver-licenses.entity';
 import { Cars } from './cars.entity';
 import { Auctions } from './auctions.entity';
+import { RolesEnum } from '../../auth/enums/roles.enum';
 
 @Entity('users')
 export class Users {
@@ -37,6 +38,9 @@ export class Users {
 
   @Column({ type: 'int', nullable: true })
   age?: number;
+
+  @Column({ type: 'enum', enum: RolesEnum, default: RolesEnum.user })
+  role: RolesEnum;
 
   @CreateDateColumn()
   createdAt: Date;

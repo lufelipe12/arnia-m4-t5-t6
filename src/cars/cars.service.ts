@@ -11,6 +11,7 @@ import { Repository } from 'typeorm';
 import { CreateCarDto } from './dto/create-car.dto';
 import { CarPhotos, Cars } from '../database/entites';
 import { UpdateCarDto } from './dto/update-car.dto';
+import { CurrentUserDto } from '../auth/dto/current-user.dto';
 
 @Injectable()
 export class CarsService {
@@ -104,6 +105,7 @@ export class CarsService {
       const carFound = await this.carsRepository.findOne({
         where: { id },
         relations: {
+          user: true,
           photos: true,
         },
       });
@@ -120,9 +122,13 @@ export class CarsService {
     }
   }
 
-  async update(id: number, payload: UpdateCarDto) {
+  async update(id: number, payload: UpdateCarDto, currentUser: CurrentUserDto) {
     try {
       const carToUpdate = await this.findOne(id);
+
+      if (carToUpdate.user && carToUpdate.user.id !== currentUser.userId) {
+        throw new BadRequestException('Thats not your car.');
+      }
 
       await this.carsRepository.update(carToUpdate.id, payload);
 

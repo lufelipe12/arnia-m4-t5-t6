@@ -16,13 +16,14 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { Response } from 'express';
 
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { CurrentUser } from '../decorators/current-user.decorator';
-import { Response } from 'express';
+import { CurrentUserDto } from '../auth/dto/current-user.dto';
 
 @Controller('cars')
 export class CarsController {
@@ -63,8 +64,9 @@ export class CarsController {
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() payload: UpdateCarDto,
+    @CurrentUser() currentUser: CurrentUserDto,
   ) {
-    return await this.carsService.update(id, payload);
+    return await this.carsService.update(id, payload, currentUser);
   }
 
   @UseGuards(AuthGuard)
