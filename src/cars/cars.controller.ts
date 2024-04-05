@@ -17,6 +17,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { Response } from 'express';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
@@ -24,7 +25,9 @@ import { UpdateCarDto } from './dto/update-car.dto';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import { CurrentUserDto } from '../auth/dto/current-user.dto';
+import { CarDoc } from './docs';
 
+@ApiTags('cars')
 @Controller('cars')
 export class CarsController {
   constructor(private readonly carsService: CarsService) {}
@@ -45,6 +48,12 @@ export class CarsController {
     return await this.carsService.buy(userId, id);
   }
 
+  @ApiResponse({
+    type: CarDoc,
+    description: 'Car found.',
+    status: 200,
+    isArray: true,
+  })
   @Get()
   async findAll(
     @Query('page') page = 1,
@@ -54,6 +63,15 @@ export class CarsController {
     return await this.carsService.findAll(page, limit, color);
   }
 
+  @ApiResponse({
+    type: CarDoc,
+    description: 'Car found.',
+    status: 200,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Car not found.',
+  })
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return await this.carsService.findOne(id);

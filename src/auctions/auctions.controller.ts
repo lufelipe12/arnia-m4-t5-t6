@@ -15,7 +15,9 @@ import { CreateAuctionDto } from './dto/create-auction.dto';
 import { AuthGuard } from '../auth/guards/auth.guard';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import { CurrentUserDto } from '../auth/dto/current-user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('auctions')
 @UseGuards(AuthGuard)
 @Controller('auctions')
 export class AuctionsController {
