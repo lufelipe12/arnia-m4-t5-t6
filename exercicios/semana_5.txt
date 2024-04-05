@@ -36,3 +36,11 @@ b) Crie uma rota para retornar a imagem pelo nome.
 
 a) Crie um service para relacionar a imagem com um evento existente.
 b) Crie uma rota para get event by id, mostrando também o link das imagens relacionadas.
+
+05/04.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Crie uma rota para editar a data de um evento existente.
+b) Documente a aplicação.
+c) Faça o DER da aplicação.
