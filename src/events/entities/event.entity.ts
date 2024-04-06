@@ -5,9 +5,11 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { EventPhoto } from './event-photo.entity';
 
 @Entity()
 export class Event {
@@ -19,6 +21,9 @@ export class Event {
 
   @Column()
   eventDate: Date;
+
+  @OneToMany(() => EventPhoto, (photo) => photo.event)
+  photos: EventPhoto[];
 
   @ManyToMany(() => User, (user) => user.events)
   @JoinTable()

@@ -64,10 +64,11 @@ export class EventsController {
     }),
   )
   uploadPhoto(
+    @Param('id') id: string,
     @UploadedFile()
     file: Express.Multer.File,
   ) {
-    console.log('teste', file);
+    return this.eventsService.uploadPhoto(+id, file);
   }
 
   @Get('/photo/:filename')

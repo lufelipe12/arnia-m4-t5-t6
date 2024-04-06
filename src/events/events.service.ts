@@ -7,16 +7,23 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ConfigService } from '@nestjs/config';
 import { UsersService } from 'src/users/users.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { Event } from './entities/event.entity';
+import { EventPhoto } from './entities/event-photo.entity';
 
 @Injectable()
 export class EventsService {
   constructor(
     @InjectRepository(Event)
     private eventRepository: Repository<Event>,
+
+    @InjectRepository(EventPhoto)
+    private eventPhotoRepository: Repository<EventPhoto>,
+
+    private configService: ConfigService,
 
     private userService: UsersService,
   ) {}
@@ -67,6 +74,35 @@ export class EventsService {
     }
   }
 
+  async uploadPhoto(eventId: number, file: Express.Multer.File) {
+    try {
+      // buscar o evento
+      const event = await this.findOne(eventId);
+
+      // criar a imagem
+      const photo = this.eventPhotoRepository.create();
+
+      const imageLink = `${this.configService.get('BASE_URL')}/events/photo/${file.filename}`;
+
+      photo.imageLink = imageLink;
+
+      // fazer o relacionamento
+      photo.event = event;
+
+      // salvar
+      await this.eventPhotoRepository.save(photo);
+
+      return photo;
+    } catch (error) {
+      throw new HttpException(
+        {
+          message: error?.message ?? 'Bad Request',
+        },
+        error?.status || HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
   findAll() {
     return this.eventRepository.find();
   }
@@ -79,6 +115,7 @@ export class EventsService {
         },
         relations: {
           participants: true,
+          photos: true,
         },
       });
 
