@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -14,11 +15,22 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
 import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { CurrentUserDto } from 'src/decorators/dto/current-user.dto';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateUserDocs } from './docs/create-user.docs';
+import { UserResponseDocs } from './docs/user-response.docs';
 
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiBody({
+    type: CreateUserDocs,
+  })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    type: UserResponseDocs,
+  })
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);

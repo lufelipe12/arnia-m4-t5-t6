@@ -125,8 +125,26 @@ export class EventsService {
     }
   }
 
-  update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  async update(id: number, updateEventDto: UpdateEventDto) {
+    try {
+      const { affected } = await this.eventRepository.update(
+        id,
+        updateEventDto,
+      );
+
+      if (affected === 0) {
+        throw new NotFoundException('Event not found');
+      }
+
+      return this.findOne(id);
+    } catch (error) {
+      throw new HttpException(
+        {
+          message: error?.message ?? 'Internal Server Error',
+        },
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   remove(id: number) {
