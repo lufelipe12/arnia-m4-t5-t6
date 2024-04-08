@@ -1,0 +1,12 @@
+SEMANA 6.
+
+08/04.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Crie uma função na pasta utils que receba uma data no formato Date Isostring (2023-09-04T14:25:23.123Z) e transforme em data (04/09/2023).
+b) Faça um teste para essa função.
+c) Crie mais uma função que valide um cpf. Regras: https://homepages.dcc.ufmg.br/~rodolfo/aedsi-2-10/regrasDigitosVerificadoresCPF.html
+d) Faça um teste para essa função.
+
+** Desafio: Prepare o ambiente para teste do UserService (Mocks)
