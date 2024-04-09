@@ -10,3 +10,10 @@ c) Crie mais uma função que valide um cpf. Regras: https://homepages.dcc.ufmg.
 d) Faça um teste para essa função.
 
 ** Desafio: Prepare o ambiente para teste do UserService (Mocks)
+
+
+09/04.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Teste os métodos presentes no UserService.
