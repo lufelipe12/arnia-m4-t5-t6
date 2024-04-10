@@ -17,3 +17,9 @@ d) Faça um teste para essa função.
 1- Ainda sobre o projeto criado anteriormente.
 
 a) Teste os métodos presentes no UserService.
+
+10/04.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Teste os métodos presentes no AuthService.
