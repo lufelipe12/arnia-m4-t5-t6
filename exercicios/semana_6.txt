@@ -23,3 +23,10 @@ a) Teste os métodos presentes no UserService.
 1- Ainda sobre o projeto criado anteriormente.
 
 a) Teste os métodos presentes no AuthService.
+
+11/04.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Teste todos métodos do users controller.
+b) Teste a aplicação dos guards nos métodos devidos.
