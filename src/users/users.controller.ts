@@ -9,13 +9,13 @@ import {
   UseGuards,
   HttpStatus,
 } from '@nestjs/common';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
-import { CurrentUser } from 'src/decorators/current-user.decorator';
-import { CurrentUserDto } from 'src/decorators/dto/current-user.dto';
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../auth/guards/auth.guard';
+import { CurrentUser } from '../decorators/current-user.decorator';
+import { CurrentUserDto } from '../decorators/dto/current-user.dto';
 import { CreateUserDocs } from './docs/create-user.docs';
 import { UserResponseDocs } from './docs/user-response.docs';
 
