@@ -30,3 +30,9 @@ a) Teste os métodos presentes no AuthService.
 
 a) Teste todos métodos do users controller.
 b) Teste a aplicação dos guards nos métodos devidos.
+
+12/04.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Crie um teste para a função de upload de arquivos no service.
