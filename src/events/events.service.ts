@@ -8,7 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { Event } from './entities/event.entity';
@@ -82,7 +82,7 @@ export class EventsService {
       // criar a imagem
       const photo = this.eventPhotoRepository.create();
 
-      const imageLink = `${this.configService.get('BASE_URL')}/events/photo/${file.filename}`;
+      const imageLink = `${this.configService.get('BASE_URL') || ''}/events/photo/${file.filename}`;
 
       photo.imageLink = imageLink;
 
