@@ -1,0 +1,7 @@
+SEMANA 7.
+
+15/04.
+
+1- Ainda sobre o projeto criado anteriormente.
+
+a) Crie testes e2e para o users. (não será necessário a conexão real com o banco.)
