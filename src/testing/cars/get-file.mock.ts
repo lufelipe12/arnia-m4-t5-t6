@@ -7,7 +7,7 @@ export const getFileMock = async () => {
     join(__dirname, 'monza.jpeg'),
   );
 
-  const photo = {
+  const photo: Express.Multer.File = {
     fieldname: 'monza-novo',
     originalname: 'monza-novo.jpg',
     encoding: 'encoding',
