@@ -12,7 +12,7 @@ export const userRepositoryMock = {
     find: jest.fn().mockResolvedValue(usersMock),
     findOne: jest.fn(),
     findOneBy: jest.fn().mockResolvedValue(userMock),
-    findOneOrFail: jest.fn(),
+    findOneOrFail: jest.fn().mockResolvedValue(userMock),
     update: jest.fn().mockResolvedValue(updatedMock),
   },
 };
