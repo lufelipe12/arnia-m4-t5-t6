@@ -5,3 +5,15 @@ SEMANA 7.
 1- Ainda sobre o projeto criado anteriormente.
 
 a) Crie testes e2e para o users. (não será necessário a conexão real com o banco.)
+
+16/04. --- REVISÃO
+
+1- Iniciando novo projeto de revisão
+
+a) Crie um DER que representa a aplicação. User (id, name, email, password, role - buyer ou seller, createdAt e updatedAt) - House (id, description, city, neighborhood, street, number, price, area, sellerId, ownerdId, createdAt e updatedAt)
+b) Crie um novo projeto Nestjs
+c) Configure todo o bootstrap também com Swagger
+d) Configure o app module para receber variáveis de ambiente
+e) Inicie o projeto
+
+Dica - Lembre-se de adicionar as constraints de NOT NULL, UNIQUE, etc em seu DER conforme você achar mais coerente. (use sua abstração.)
