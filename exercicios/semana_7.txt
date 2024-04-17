@@ -17,3 +17,10 @@ d) Configure o app module para receber variáveis de ambiente
 e) Inicie o projeto
 
 Dica - Lembre-se de adicionar as constraints de NOT NULL, UNIQUE, etc em seu DER conforme você achar mais coerente. (use sua abstração.)
+
+17/04.
+
+1- continuando...
+
+a) Faça a configuração para conexão com o banco de dados. (crie um novo com o nome que desejar)
+b) Crie as entidades e veja se refletiram como tabela no banco criado.
