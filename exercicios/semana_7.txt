@@ -31,3 +31,15 @@ b) Crie as entidades e veja se refletiram como tabela no banco criado.
 
 a) Crie as resourses para cada entidade. (auth, user, houses)
 b) Crie uma rota para criação de users em auth/register.
+
+19/04.
+
+1- ...
+
+a) Crie uma rota de login em auth.
+b) Crie rota de get -> /users
+c) Crie rota de get -> /users/:id
+d) Crie uma rota de patch -> /users/:id
+e) Crie uma rota de post -> /houses
+f) Crie uma rota de get -> /houses
+g) Crie uma rota de get -> /houses/:id
