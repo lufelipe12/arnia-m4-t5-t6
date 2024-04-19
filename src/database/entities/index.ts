@@ -1,2 +1,2 @@
-export * from './users.entity';
-export * from './subjects.entity';
+export * from "./users.entity";
+export * from "./subjects.entity";
