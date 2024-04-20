@@ -1,4 +1,5 @@
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -6,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 import { UserRoleEnum } from 'src/enums/user-role.enum';
 import { House } from './House.entity';
 
@@ -17,10 +19,10 @@ export class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @Column({
@@ -41,4 +43,14 @@ export class User {
 
   @OneToMany(() => House, (house) => house.seller)
   sellHouses: House[];
+
+  @BeforeInsert()
+  async passwordHash() {
+    try {
+      this.password = await bcrypt.hash(this.password, 10);
+    } catch (error) {
+      console.log('Error on password hash.', error);
+      throw error;
+    }
+  }
 }
