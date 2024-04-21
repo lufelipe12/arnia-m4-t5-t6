@@ -3,6 +3,7 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -45,12 +46,36 @@ export class UsersService {
     }
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async getUserByEmail(email: string) {
+    try {
+      return await this.userRepository.findOne({
+        where: { email },
+        select: {
+          email: true,
+          id: true,
+          password: true,
+          role: true,
+        },
+      });
+    } catch (error) {
+      throw new HttpException(
+        error.message,
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findAll() {
+    return this.userRepository.find();
+  }
+
+  async findOne(id: number) {
+    try {
+      const user = await this.userRepository.findOneOrFail({ where: { id } });
+      return user;
+    } catch (error) {
+      throw new NotFoundException('User not found');
+    }
   }
 
   remove(id: number) {
