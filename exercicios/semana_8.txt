@@ -1,0 +1,10 @@
+SEMANA 8.
+
+22/04.
+
+1- ...
+
+a) Crie o AuthGuard
+b) Crie um decorator de Roles
+c) Crie um RoleGuard
+d) Proteja as rotas de criação de casas para que somente seller possa registrá-la.
