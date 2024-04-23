@@ -8,3 +8,10 @@ a) Crie o AuthGuard
 b) Crie um decorator de Roles
 c) Crie um RoleGuard
 d) Proteja as rotas de criação de casas para que somente seller possa registrá-la.
+
+23/04.
+
+1- ...
+
+a) Crie uma rota para um usuário comprar uma casa, o sellerId deve ficar null
+b) Faça uma documentação pro projeto elaborado até agora.
