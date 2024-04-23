@@ -9,6 +9,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { Users } from "../database/entities";
 import { Repository } from "typeorm";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
 @Injectable()
 export class UsersService {
@@ -79,6 +80,35 @@ export class UsersService {
       }
 
       return user;
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
+  async update(id: number, data: UpdateUserDto) {
+    try {
+      const userToUpdate = await this.show(id);
+
+      await this.usersRepository.update(
+        id,
+        this.usersRepository.merge(userToUpdate, data),
+      );
+
+      return userToUpdate;
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
+  async delete(id: number) {
+    try {
+      await this.show(id);
+
+      await this.usersRepository.softDelete(id);
+
+      return { response: "User deleted with success." };
     } catch (error) {
       console.log(error);
       throw new HttpException(error.message, error.status);

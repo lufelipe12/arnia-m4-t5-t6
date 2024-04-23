@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateUserDto } from './create-user.dto';
+import { PartialType } from "@nestjs/swagger";
+import { IsEmpty } from "class-validator";
 
-export class UpdateUserDto extends PartialType(CreateUserDto) {}
+import { CreateUserDto } from "./create-user.dto";
+
+export class UpdateUserDto extends PartialType(CreateUserDto) {
+  @IsEmpty()
+  password?: string;
+}
