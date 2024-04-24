@@ -37,6 +37,13 @@ export class HousesController {
     return this.housesService.findAll();
   }
 
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles([UserRoleEnum.BUYER])
+  @Post(':id/buy')
+  buyHouse(@Param('id') id: string, @CurrentUser() user: CurrentUserDto) {
+    return this.housesService.buyHouse(+id, user.sub);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.housesService.findOne(+id);

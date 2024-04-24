@@ -1,5 +1,6 @@
 import { Repository } from 'typeorm';
 import {
+  BadRequestException,
   HttpException,
   HttpStatus,
   Injectable,
@@ -65,5 +66,31 @@ export class HousesService {
 
   remove(id: number) {
     return `This action removes a #${id} house`;
+  }
+
+  async buyHouse(id: number, userId: number) {
+    try {
+      const house = await this.findOne(id);
+
+      if (!house.seller) {
+        throw new BadRequestException("House isn't selling");
+      }
+
+      const user = await this.userService.findOne(userId);
+
+      house.owner = user;
+      house.seller = null;
+
+      await this.houseRepository.save(house);
+
+      return house;
+    } catch (error) {
+      throw new HttpException(
+        error.message,
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+    console.log('id', id);
+    console.log('userId', userId);
   }
 }
