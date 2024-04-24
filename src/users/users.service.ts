@@ -9,6 +9,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/User.entity';
 import { RegisterAuthDto } from 'src/auth/dto/register-auth.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -66,6 +67,24 @@ export class UsersService {
   }
 
   findAll() {
+    return this.userRepository.find();
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    try {
+      const { affected } = await this.userRepository.update(id, updateUserDto);
+
+      if (!affected) {
+        throw new NotFoundException('User not found');
+      }
+
+      return this.findOne(id);
+    } catch (error) {
+      throw new HttpException(
+        error.message,
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
     return this.userRepository.find();
   }
 
