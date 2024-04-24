@@ -6,7 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
+import { RoleGuard } from 'src/guards/role.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { UserRoleEnum } from 'src/enums/user-role.enum';
+import { CurrentUser } from 'src/decorators/current-user.decorator';
+import { CurrentUserDto } from 'src/decorators/dto/current-user.dto';
 import { HousesService } from './houses.service';
 import { CreateHouseDto } from './dto/create-house.dto';
 import { UpdateHouseDto } from './dto/update-house.dto';
@@ -15,9 +22,14 @@ import { UpdateHouseDto } from './dto/update-house.dto';
 export class HousesController {
   constructor(private readonly housesService: HousesService) {}
 
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles([UserRoleEnum.SELLER])
   @Post()
-  create(@Body() createHouseDto: CreateHouseDto) {
-    return this.housesService.create(createHouseDto);
+  create(
+    @Body() createHouseDto: CreateHouseDto,
+    @CurrentUser() user: CurrentUserDto,
+  ) {
+    return this.housesService.create(createHouseDto, user.sub);
   }
 
   @Get()

@@ -19,13 +19,11 @@ export class HousesService {
 
     private userService: UsersService,
   ) {}
-  async create(createHouseDto: CreateHouseDto) {
-    const { sellerId, ...house } = createHouseDto;
-
+  async create(createHouseDto: CreateHouseDto, sellerId: number) {
     try {
       const seller = await this.userService.findOne(sellerId);
 
-      const createHouse = this.houseRepository.create(house);
+      const createHouse = this.houseRepository.create(createHouseDto);
 
       createHouse.seller = seller;
 

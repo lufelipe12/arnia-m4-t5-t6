@@ -27,7 +27,4 @@ export class CreateHouseDto {
   @IsNumber()
   @IsPositive()
   area: number;
-
-  @IsNumber()
-  sellerId: number;
 }
