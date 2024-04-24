@@ -15,3 +15,11 @@ d) Proteja as rotas de criação de casas para que somente seller possa registr�
 
 a) Crie uma rota para um usuário comprar uma casa, o sellerId deve ficar null
 b) Faça uma documentação pro projeto elaborado até agora.
+
+24/04.
+
+1- ...
+
+a) Crie uma rota de patch -> /houses/:id
+b) Crie uma rota de soft delete -> /houses/:id (adicione o campo deletedAt na entidade house para o efeito desejado)
+c) Documente a rota criada com swagger
