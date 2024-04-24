@@ -8,6 +8,7 @@ import {
   Param,
   ParseIntPipe,
   Patch,
+  Request,
   UseGuards,
 } from "@nestjs/common";
 
@@ -17,6 +18,7 @@ import { Roles } from "../auth/decorators/roles.decorator";
 import { RoleEnum } from "../auth/enums/role.enum";
 import { RoleGuard } from "../auth/guards/role.guard";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { ChangePasswordDto } from "./dto/change-password.dto";
 
 @Controller("users")
 @UseGuards(AuthGuard, RoleGuard)
@@ -35,6 +37,16 @@ export class UsersController {
     return await this.usersService.show(id);
   }
 
+  @HttpCode(HttpStatus.ACCEPTED)
+  @Patch("change-password")
+  async changePassword(
+    @Request() req: Request,
+    @Body() data: ChangePasswordDto,
+  ) {
+    const { userId } = req["user"];
+    return await this.usersService.changePassword(userId, data);
+  }
+
   @Roles(RoleEnum.admin)
   @Patch(":id")
   async update(
@@ -42,6 +54,13 @@ export class UsersController {
     @Body() data: UpdateUserDto,
   ) {
     return await this.usersService.update(id, data);
+  }
+
+  @Roles(RoleEnum.admin)
+  @HttpCode(HttpStatus.ACCEPTED)
+  @Patch(":id/reactivate")
+  async reactivate(@Param("id", ParseIntPipe) id: number) {
+    return await this.usersService.reactivate(id);
   }
 
   @Roles(RoleEnum.admin)

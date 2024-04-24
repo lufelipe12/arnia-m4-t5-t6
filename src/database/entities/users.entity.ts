@@ -1,9 +1,8 @@
 import { BadRequestException } from "@nestjs/common";
 import * as bcrypt from "bcrypt";
-
-import { RoleEnum } from "../../auth/enums/role.enum";
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
@@ -13,6 +12,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+
+import { RoleEnum } from "../../auth/enums/role.enum";
+
 import { Subjects } from "./subjects.entity";
 
 @Entity("users")
@@ -59,6 +61,7 @@ export class Users {
   deletedAt: Date;
 
   @BeforeInsert()
+  @BeforeUpdate()
   async hashPassword() {
     try {
       this.password = await bcrypt.hash(this.password, 10);

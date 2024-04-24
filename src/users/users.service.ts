@@ -3,13 +3,16 @@ import {
   HttpException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import * as bcrypt from "bcrypt";
 
 import { CreateUserDto } from "./dto/create-user.dto";
 import { Users } from "../database/entities";
 import { Repository } from "typeorm";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { ChangePasswordDto } from "./dto/change-password.dto";
 
 @Injectable()
 export class UsersService {
@@ -86,6 +89,33 @@ export class UsersService {
     }
   }
 
+  async changePassword(userId: number, data: ChangePasswordDto) {
+    try {
+      const user = await this.usersRepository.findOne({
+        where: { id: userId },
+        select: {
+          id: true,
+          password: true,
+        },
+      });
+
+      if (!(await bcrypt.compare(data.currentPassword, user.password))) {
+        throw new UnauthorizedException("Passwords dont match.");
+      }
+
+      user.password = data.newPassword;
+
+      await this.usersRepository.update(userId, user);
+
+      return await this.usersRepository.findOne({
+        where: { id: userId },
+      });
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
   async update(id: number, data: UpdateUserDto) {
     try {
       const userToUpdate = await this.show(id);
@@ -96,6 +126,17 @@ export class UsersService {
       );
 
       return userToUpdate;
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(error.message, error.status);
+    }
+  }
+
+  async reactivate(id: number) {
+    try {
+      await this.usersRepository.restore(id);
+
+      return { response: "User restored with success." };
     } catch (error) {
       console.log(error);
       throw new HttpException(error.message, error.status);
