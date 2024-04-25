@@ -23,3 +23,10 @@ b) Faça uma documentação pro projeto elaborado até agora.
 a) Crie uma rota de patch -> /houses/:id
 b) Crie uma rota de soft delete -> /houses/:id (adicione o campo deletedAt na entidade house para o efeito desejado)
 c) Documente a rota criada com swagger
+
+25/04
+
+1-
+
+a) Crie uma conta no site https://www.codewars.com/
+b) Resolva o desafio: https://www.codewars.com/kata/5467e4d82edf8bbf40000155
