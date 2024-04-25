@@ -13,7 +13,7 @@ export class Subjects {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "varchar", length: 64, nullable: false })
+  @Column({ type: "varchar", length: 64, nullable: false, unique: true })
   name: string;
 
   @Column({ type: "int", nullable: false })

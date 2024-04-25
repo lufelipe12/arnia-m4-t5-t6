@@ -96,6 +96,7 @@ export class UsersService {
         select: {
           id: true,
           password: true,
+          age: true,
         },
       });
 
@@ -118,14 +119,11 @@ export class UsersService {
 
   async update(id: number, data: UpdateUserDto) {
     try {
-      const userToUpdate = await this.show(id);
+      await this.show(id);
 
-      await this.usersRepository.update(
-        id,
-        this.usersRepository.merge(userToUpdate, data),
-      );
+      await this.usersRepository.update(id, data);
 
-      return userToUpdate;
+      return await this.show(id);
     } catch (error) {
       console.log(error);
       throw new HttpException(error.message, error.status);
