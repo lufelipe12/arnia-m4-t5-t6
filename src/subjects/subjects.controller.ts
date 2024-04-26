@@ -1,4 +1,18 @@
-import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Request,
+  UseGuards,
+} from "@nestjs/common";
+import { Request as Req } from "express";
 
 import { SubjectsService } from "./subjects.service";
 import { CreateSubjectDto } from "./dto/create-subject.dto";
@@ -6,6 +20,7 @@ import { AuthGuard } from "../auth/guards/auth.guard";
 import { RoleGuard } from "../auth/guards/role.guard";
 import { Roles } from "../auth/decorators/roles.decorator";
 import { RoleEnum } from "../auth/enums/role.enum";
+import { UpdateSubjectDto } from "./dto/update-subject.dto";
 
 @Controller("subjects")
 export class SubjectsController {
@@ -21,5 +36,51 @@ export class SubjectsController {
   @Get()
   async list() {
     return await this.subjectsService.list();
+  }
+
+  @Get(":id")
+  async show(@Param("id", ParseIntPipe) id: number) {
+    return await this.subjectsService.show(id);
+  }
+
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(RoleEnum.admin)
+  @Patch(":id")
+  async update(
+    @Param("id", ParseIntPipe) id: number,
+    @Body() data: UpdateSubjectDto,
+  ) {
+    return await this.subjectsService.update(id, data);
+  }
+
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(RoleEnum.admin)
+  @Delete(":id")
+  async delete(@Param("id", ParseIntPipe) id: number) {
+    return await this.subjectsService.delete(id);
+  }
+
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(RoleEnum.admin)
+  @HttpCode(HttpStatus.ACCEPTED)
+  @Post(":id/instructors/:instructorId")
+  async addInstructor(
+    @Param("id", ParseIntPipe) id: number,
+    @Param("instructorId", ParseIntPipe) instructorId: number,
+  ) {
+    return await this.subjectsService.addInstructor(id, instructorId);
+  }
+
+  @UseGuards(AuthGuard, RoleGuard)
+  @Roles(RoleEnum.student)
+  @HttpCode(HttpStatus.ACCEPTED)
+  @Post(":id/students")
+  async addStudents(
+    @Param("id", ParseIntPipe) id: number,
+    @Request() req: Req,
+  ) {
+    const { userId } = req["user"];
+
+    return await this.subjectsService.addStudent(id, userId);
   }
 }
