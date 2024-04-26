@@ -30,3 +30,11 @@ c) Documente a rota criada com swagger
 
 a) Crie uma rota para reativar a casa deletada.
 b) Faça uma rota para mudar a senha do usuário, onde somente o user possa alterar a própria senha.
+
+
+26/04.
+
+1-
+
+a) Crie uma conta no site https://www.codewars.com/
+b) Resolva o desafio: https://www.codewars.com/kata/5467e4d82edf8bbf40000155
