@@ -45,6 +45,7 @@ export class User {
   sellHouses: House[];
 
   @BeforeInsert()
+  //@BeforeUpdate()
   async passwordHash() {
     try {
       this.password = await bcrypt.hash(this.password, 10);

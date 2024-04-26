@@ -58,4 +58,9 @@ export class HousesController {
   softDelete(@Param('id') id: string) {
     return this.housesService.softDelete(+id);
   }
+
+  @Patch(':id/restore')
+  restore(@Param('id') id: string) {
+    return this.housesService.restore(+id);
+  }
 }

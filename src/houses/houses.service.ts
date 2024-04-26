@@ -115,7 +115,22 @@ export class HousesService {
         error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
       );
     }
-    console.log('id', id);
-    console.log('userId', userId);
+  }
+
+  async restore(id: number) {
+    try {
+      const { affected } = await this.houseRepository.restore(id);
+
+      if (!affected) {
+        throw new NotFoundException('House not found');
+      }
+
+      return await this.findOne(id);
+    } catch (error) {
+      throw new HttpException(
+        error.message,
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }

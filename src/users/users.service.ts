@@ -4,12 +4,15 @@ import {
   HttpStatus,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 import { User } from 'src/database/entities/User.entity';
 import { RegisterAuthDto } from 'src/auth/dto/register-auth.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 
 @Injectable()
 export class UsersService {
@@ -66,6 +69,26 @@ export class UsersService {
     }
   }
 
+  private async getFullUserById(id: number) {
+    try {
+      return await this.userRepository.findOne({
+        where: { id },
+        select: {
+          email: true,
+          id: true,
+          password: true,
+          role: true,
+          name: true,
+        },
+      });
+    } catch (error) {
+      throw new HttpException(
+        error.message,
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
+
   findAll() {
     return this.userRepository.find();
   }
@@ -94,6 +117,37 @@ export class UsersService {
       return user;
     } catch (error) {
       throw new NotFoundException('User not found');
+    }
+  }
+
+  async changePassword(userId: number, body: UpdatePasswordDto) {
+    try {
+      // buscar o usuario
+      const user = await this.getFullUserById(userId);
+
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
+
+      // comparar as senhas -> comparar a senha com a senha enviada
+      const result = await bcrypt.compare(body.password, user.password);
+
+      if (!result) {
+        throw new UnauthorizedException();
+      }
+
+      // criar hash e salvar a nova senha
+      user.password = await bcrypt.hash(body.newPassword, 10);
+
+      /* user.password = body.newPassword; */
+
+      // salva o usuario
+      await this.userRepository.save(user);
+    } catch (error) {
+      throw new HttpException(
+        error.message,
+        error?.status || HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 

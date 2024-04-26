@@ -29,7 +29,10 @@ export class AuthService {
       }
 
       // comparar senha
-      const compare = bcrypt.compare(loginAuthDto.password, user.password);
+      const compare = await bcrypt.compare(
+        loginAuthDto.password,
+        user.password,
+      );
 
       if (!compare) {
         throw new UnauthorizedException('Email or password wrong');
