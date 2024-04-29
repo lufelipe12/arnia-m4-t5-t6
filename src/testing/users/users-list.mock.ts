@@ -1,0 +1,40 @@
+import { RoleEnum } from "../../auth/enums/role.enum";
+
+export const usersListMock = [
+  {
+    id: 1,
+    firstName: "Luiz",
+    lastName: "Dias",
+    age: 28,
+    email: "lf@gmail.com",
+    password: "1234",
+    role: RoleEnum.admin,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deletedAt: null,
+  },
+  {
+    id: 2,
+    firstName: "Fabim",
+    lastName: "Dias",
+    age: 35,
+    email: "fabim@gmail.com",
+    password: "1234",
+    role: RoleEnum.instructor,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deletedAt: null,
+  },
+  {
+    id: 3,
+    firstName: "Maria",
+    lastName: "Dias",
+    age: 18,
+    email: "maria@gmail.com",
+    password: "1234",
+    role: RoleEnum.student,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deletedAt: null,
+  },
+];
