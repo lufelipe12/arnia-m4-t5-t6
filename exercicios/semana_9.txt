@@ -6,3 +6,15 @@ SEMANA 9.
 
 a) Teste o serviço de register de user.
 b) Teste o serviço de login.
+
+30/04.
+
+1- ...
+
+a) Teste o serviço de get all users.
+b) Teste o serviço de get user by id.
+
+2- 
+
+a) Faça a documentação do projeto com Swagger.
+b) Faça um README explicativo do projeto.
