@@ -11,6 +11,7 @@ import {
   Request,
   UseGuards,
 } from "@nestjs/common";
+import { ApiBearerAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
 
 import { UsersService } from "./users.service";
 import { AuthGuard } from "../auth/guards/auth.guard";
@@ -19,18 +20,28 @@ import { RoleEnum } from "../auth/enums/role.enum";
 import { RoleGuard } from "../auth/guards/role.guard";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { ChangePasswordDto } from "./dto/change-password.dto";
+import { UserCreatedDoc } from "../docs";
 
+@ApiBearerAuth()
+@ApiTags("users")
 @Controller("users")
 @UseGuards(AuthGuard, RoleGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiResponse({
+    type: UserCreatedDoc,
+    isArray: true,
+  })
   @Roles(RoleEnum.admin, RoleEnum.instructor)
   @Get()
   async list() {
     return await this.usersService.list();
   }
 
+  @ApiResponse({
+    type: UserCreatedDoc,
+  })
   @Roles(RoleEnum.admin, RoleEnum.instructor)
   @Get(":id")
   async show(@Param("id", ParseIntPipe) id: number) {

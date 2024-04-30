@@ -21,11 +21,14 @@ import { RoleGuard } from "../auth/guards/role.guard";
 import { Roles } from "../auth/decorators/roles.decorator";
 import { RoleEnum } from "../auth/enums/role.enum";
 import { UpdateSubjectDto } from "./dto/update-subject.dto";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
+@ApiTags("subjects")
 @Controller("subjects")
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
 
+  @ApiBearerAuth()
   @UseGuards(AuthGuard, RoleGuard)
   @Roles(RoleEnum.admin)
   @Post()
@@ -43,6 +46,7 @@ export class SubjectsController {
     return await this.subjectsService.show(id);
   }
 
+  @ApiBearerAuth()
   @UseGuards(AuthGuard, RoleGuard)
   @Roles(RoleEnum.admin)
   @Patch(":id")
@@ -53,6 +57,7 @@ export class SubjectsController {
     return await this.subjectsService.update(id, data);
   }
 
+  @ApiBearerAuth()
   @UseGuards(AuthGuard, RoleGuard)
   @Roles(RoleEnum.admin)
   @Delete(":id")
@@ -60,6 +65,7 @@ export class SubjectsController {
     return await this.subjectsService.delete(id);
   }
 
+  @ApiBearerAuth()
   @UseGuards(AuthGuard, RoleGuard)
   @Roles(RoleEnum.admin)
   @HttpCode(HttpStatus.ACCEPTED)
@@ -71,6 +77,7 @@ export class SubjectsController {
     return await this.subjectsService.addInstructor(id, instructorId);
   }
 
+  @ApiBearerAuth()
   @UseGuards(AuthGuard, RoleGuard)
   @Roles(RoleEnum.student)
   @HttpCode(HttpStatus.ACCEPTED)

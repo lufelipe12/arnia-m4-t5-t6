@@ -13,7 +13,7 @@ async function bootstrap() {
   const swaggerConfig = new DocumentBuilder()
     .setTitle("College API")
     .setDescription("This api was made for arnia college students")
-    .setVersion("0.1")
+    .setVersion("1.0")
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup("v1/docs", app, document);
