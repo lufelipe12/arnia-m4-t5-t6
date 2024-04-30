@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { UserRoleEnum } from 'src/enums/user-role.enum';
+import { UserRoleEnum } from '../../enums/user-role.enum';
 import { House } from './House.entity';
 
 @Entity()
