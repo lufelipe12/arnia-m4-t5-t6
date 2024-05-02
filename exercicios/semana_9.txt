@@ -18,3 +18,7 @@ b) Teste o serviço de get user by id.
 
 a) Faça a documentação do projeto com Swagger.
 b) Faça um README explicativo do projeto.
+
+02/05.
+
+Desafio codewars: https://www.codewars.com/kata/5667e8f4e3f572a8f2000039
