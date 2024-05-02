@@ -1,63 +1,38 @@
-<<<<<<< HEAD
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## Descrição
+Este projeto foi desenvolvido com o objetivo de ensino dos estudantes da escola de programação Arnia. Ele é uma API que visa o gerenciamento de estudantes, professores e suas respectivas matérias por um administrador do sistema, no qual ficará responsável pelo registro e manipulação de novos dados. Para informações de endpoints, acessar a [doc](http://localhost:3001/v1/docs).
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Tecnologias
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- [**Nestjs**](https://nestjs.com/): Utilizado como framework do servidor rodando por debaixo dos panos Nodejs e Express.
+- [**Postgresql**](https://www.postgresql.org/docs/): Banco de dados relacional utilizado no projeto.
+- [**TypeORM**](https://typeorm.io/): ORM utilizado para conexão e manipulação de tabelas no banco de dados.
+- [**Swagger**](https://swagger.io/): Framework utilizado para a documentação das rotas e objetos que transitam na aplicação.
+- [**Jest**](https://jestjs.io/pt-BR/): Framework Nodejs voltado para a realização de testes.
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+## Instalando e rodando o projeto
+Primeiramente será necessária instalação das dependências do projeto, rodando o comando:
 
 ```bash
-$ npm install
+npm install
 ```
 
-## Running the app
+Setar as variáveis de ambiente contidas no .env.example com aquelas configuradas em sua máquina. Após isso, rodar o comando:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Test
+## Testes
+
+Para rodar e observar os testes presentes na aplicação, rodar o comando:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run test
 ```
+
+## Diagrama de entidade e relacionamento (DER):
+
+![DER](https://private-user-images.githubusercontent.com/90461911/327011178-f22b7c09-bbd7-4ac0-9771-7d1e1c026f4a.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MTQ1MTk1NTksIm5iZiI6MTcxNDUxOTI1OSwicGF0aCI6Ii85MDQ2MTkxMS8zMjcwMTExNzgtZjIyYjdjMDktYmJkNy00YWMwLTk3NzEtN2QxZTFjMDI2ZjRhLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDA0MzAlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwNDMwVDIzMjA1OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTBkYjdlM2UxZGM4YjEyNTI0OGEzNWFhNTBiNjkzYmY2ODQ0NzE1Mzk1ODIzMjE0ZTk0YjZkMjYyZTQ0MWRjZjImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.U89oP9ZijyPgQe0yHaxdNiMNC53-mADO0rOFR8yS_N0)
 
 ## Support
 
@@ -72,6 +47,3 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
-=======
-# arnia-m4-t5-t6
->>>>>>> 388965bf36ef48c2aab4dc114b448a140c993701
